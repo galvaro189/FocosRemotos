@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<button id="boton1">Foco 1 On</button>
+<button id="boton2">Foco 2 On</button>
+<button id="boton3">Foco 1 Off</button>
+<button id="boton4">Foco 2 Off</button>
+<button id="boton5">SOS</button>
+<button id="boton6">FADE</button>
+<script src="jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+<script>
+    $(document).ready(function () {
+        function hazAlert(){
+            socket.emit('foco1-on');
+            setTimeout(function () {
+                socket.emit('foco1-off');
+                setTimeout(function () {
+                    socket.emit('foco1-on');
+                    setTimeout(function () {
+                        socket.emit('foco1-off');
+                        setTimeout(function () {
+                            socket.emit('foco1-on');
+                            setTimeout(function () {
+                                socket.emit('foco1-off');
+                                setTimeout(function () {
+                                    socket.emit('foco2-on');
+                                    setTimeout(function () {
+                                        socket.emit('foco2-off');
+                                        setTimeout(function () {
+                                            socket.emit('foco2-on');
+                                            setTimeout(function () {
+                                                socket.emit('foco2-off');
+                                                setTimeout(function () {
+                                                    socket.emit('foco2-on');
+                                                    setTimeout(function () {
+                                                        socket.emit('foco2-off');
+                                                        setTimeout(function () {
+                                                            socket.emit('foco1-on');
+                                                            setTimeout(function () {
+                                                                socket.emit('foco1-off');
+                                                                setTimeout(function () {
+                                                                    socket.emit('foco1-on');
+                                                                    setTimeout(function () {
+                                                                        socket.emit('foco1-off');
+                                                                        setTimeout(function () {
+                                                                            socket.emit('foco1-on');
+                                                                            setTimeout(function () {
+                                                                                socket.emit('foco1-off');
+                                                                            },1000);
+                                                                        },1000);
+                                                                    },1000);
+                                                                },1000);
+                                                            },1000);
+                                                        },1000);
+                                                    },2000);
+                                                },2000);
+                                            },2000);
+                                        },2000);
+                                    },2000);
+                                },2000);
+                            },1000);
+                        },1000);
+                    },1000);
+                },1000);
+            },1000)
+        }
+        var socket = io.connect('http://localhost:3000');
+        $('#boton1').on("click", function (e) {
+            socket.emit('foco1-on');
+            e.preventDefault();
+        });
+        $('#boton2').on("click", function (e) {
+            socket.emit('foco2-on');
+            e.preventDefault();
+        });
+        $('#boton3').on("click", function (e) {
+            socket.emit('foco1-off');
+            e.preventDefault();
+        });
+        $('#boton4').on("click", function (e) {
+            socket.emit('foco2-off');
+            e.preventDefault();
+        });
+        $('#boton5').on("click", function (e) {
+            //var i=1;
+            //while(i<4) {
+            //   hazAlert();
+            //    i++;
+            //}
+            socket.emit('sos');
+            e.preventDefault();
+        });
+        $('#boton6').on("click", function (e) {
+            socket.emit('fade');
+            e.preventDefault();
+        });
+    })
+</script>
+</body>
+</html>
